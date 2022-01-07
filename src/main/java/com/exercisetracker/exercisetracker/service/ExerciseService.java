@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,20 +19,20 @@ public class ExerciseService {
     private UserService userService;
 
     public Exercise saveExercise(String id, Exercise exerciseForm) {
-        String username = userService.findUserById(id).getUsername();
+//        String username = userService.findUserById(id).getUsername();
         if (exerciseForm.getDate() == null) exerciseForm.setDate(LocalDate.now());
-        Exercise exerciseResult = new Exercise(exerciseForm.getDuration(), exerciseForm.getDate(), exerciseForm.getDescription(), username);
+
+        Exercise exerciseResult = new Exercise(exerciseForm.getDuration(), exerciseForm.getDate(), exerciseForm.getDescription(), id);
+
         return exerciseRepository.save(exerciseResult);
     }
 
 
-    public Exercise saveExercise(Exercise exercise) {
-        return exerciseRepository.save(exercise);
-    }
 
     public List getExerciseLog(String id) {
-        String username = userService.findUserById(id).getUsername();
-        List exerciseLogs = exerciseRepository.findByUsername(username);
+
+
+        List exerciseLogs = exerciseRepository.findByUserId(id);
         HashMap<String, Integer> count = new HashMap<>();
         count.put("count", exerciseLogs.size());
         exerciseLogs.add(count);

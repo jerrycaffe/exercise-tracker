@@ -2,6 +2,7 @@ package com.exercisetracker.exercisetracker.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,16 +24,16 @@ public class Exercise {
     @NotNull(message = "Description cannot be empty")
     private String description;
 
-    private String username;
+    private String userId;
 
     public Exercise(){}
 
-    public Exercise(int duration, LocalDate date, String description, String username) {
+    public Exercise(int duration, LocalDate date, String description, String userId) {
 
         this.duration = duration;
         this.date = date;
         this.description = description;
-        this.username = username;
+        this.userId = userId;
     }
 
     public String getId() {
@@ -67,12 +68,12 @@ public class Exercise {
         this.description = description;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -82,7 +83,7 @@ public class Exercise {
                 ", duration=" + duration +
                 ", date=" + date +
                 ", description='" + description + '\'' +
-                ", username='" + username + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 }

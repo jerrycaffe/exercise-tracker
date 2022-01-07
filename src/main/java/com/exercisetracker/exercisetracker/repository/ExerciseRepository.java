@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface ExerciseRepository extends MongoRepository<Exercise, String> {
 
-    List<Exercise> findByUsername(String username);
+    List<Exercise> findByUserId(String userId);
+
+//    List findAll(String id);
 }
